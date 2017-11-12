@@ -29,6 +29,12 @@ module.exports = function(options, filename) {
       [
         'react-transform',
         {
+          // @edit start
+          // We add PureComponent to the list of superClasses in our HMR config, because we patch
+          // pure component to not be pure when HMR is turned on. This is a tradeoff, but I think
+          // the better dev experience is worth it.
+          superClasses: ['React.PureComponent', 'PureComponent', 'React.Component', 'Component'],
+          // @edit end
           transforms: [{
             transform: transform,
             imports: ['react'],
